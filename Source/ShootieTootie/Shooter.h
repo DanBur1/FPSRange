@@ -1,7 +1,9 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
-
+#include "GameFramework/CharacterMovementComponent.h"
+#include "Camera/CameraComponent.h"
+#include "Components/CapsuleComponent.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
 #include "Shooter.generated.h"
@@ -30,7 +32,16 @@ protected:
 
   // Properties
 
-  // Character model
+  // First person camera
   UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
+  UCameraComponent *Camera;
+  // Collision
+  UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
+  UCapsuleComponent *Capsule;
+  // Character movement
+  UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
+  UCharacterMovementComponent *Movement;
+  // Character model
+  UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
   USkeletalMeshComponent *ShooterMesh;
 };
