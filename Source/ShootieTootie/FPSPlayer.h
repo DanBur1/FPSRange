@@ -7,6 +7,7 @@
 #include "CoreMinimal.h"
 #include "EnhancedInputComponent.h"
 #include "Shooter.h"
+#include "Blueprint/UserWidget.h"
 #include "FPSPlayer.generated.h"
 
 /**
@@ -47,6 +48,9 @@ protected:
 	// IA_LookUp
   UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
   class UInputAction *LookUpAction;
+	// IA_Menu
+  UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
+  UInputAction *MenuAction;
 	// IA_Turn
   UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
   class UInputAction *TurnAction;
@@ -54,11 +58,19 @@ protected:
   // Current mapping context
   UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
   UInputMappingContext *InputMappingContext;
+  // Widget of the menu
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "UI")
+  TSubclassOf<UUserWidget> MenuWidgetClass;
+
+  UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "UI")
+  UUserWidget *MenuWidget;
 
 	// Methods
 
 	// Reaction to IA_LookUp
   void onLook(const FInputActionValue &Value);
+  // Reaction to IA_Menu
+  void onMenu();
 	// Reaction to IA_Turn
   void onTurn(const FInputActionValue &Value);
 };

@@ -31,6 +31,11 @@ void AFPSPlayer::SetupInputComponent(){
       EnhancedInputComponent->BindAction(LookUpAction, ETriggerEvent::Triggered,
                                          this, &AFPSPlayer::onLook);
     }
+    // Opening the menu
+    if (MenuAction) {
+      EnhancedInputComponent->BindAction(MenuAction, ETriggerEvent::Started,
+                                         this, &AFPSPlayer::onMenu);
+    }
     // Turning sideways
     if (TurnAction) {
       EnhancedInputComponent->BindAction(TurnAction, ETriggerEvent::Triggered,
@@ -42,6 +47,26 @@ void AFPSPlayer::SetupInputComponent(){
 void AFPSPlayer::onLook(const FInputActionValue &Value){
   float pitch_value = -Value.Get<float>();
   AddPitchInput(pitch_value * mouse_sensitivity);
+}
+
+void AFPSPlayer::onMenu(){
+  if (MenuWidget){
+    if (MenuWidget->IsVisible()) {
+      SetInputMode(FInputModeGameOnly());
+      bShowMouseCursor = false;
+      MenuWidget->SetVisibility(ESlateVisibility::Hidden);
+    } else {
+      SetInputMode(FInputModeUIOnly());
+      bShowMouseCursor = true;
+    }
+      MenuWidget->SetVisibility(ESlateVisibility::Visible);
+  } else if (MenuWidgetClass){
+    MenuWidget = CreateWidget<UUserWidget>(GetWorld(), MenuWidgetClass);
+    MenuWidget->AddToViewport();
+    MenuWidget->SetVisibility(ESlateVisibility::Visible);
+    SetInputMode(FInputModeUIOnly());
+    bShowMouseCursor = true;
+  }
 }
 
 void AFPSPlayer::onTurn(const FInputActionValue &Value) {

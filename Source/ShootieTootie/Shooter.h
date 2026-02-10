@@ -4,6 +4,7 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
+#include "Weapon.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
 #include "Shooter.generated.h"
@@ -44,4 +45,7 @@ protected:
   // Character model
   UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
   USkeletalMeshComponent *ShooterMesh;
+  // Weapon character currently has
+  UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Character items")
+  AWeapon *Weapon;
 };

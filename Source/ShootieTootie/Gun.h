@@ -27,5 +27,5 @@ class SHOOTIETOOTIE_API AGun : public AWeapon
     TArray<ECyclingType> Modes;
 		// Current firing mode of the gun
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Gun mechanics")
-    ECyclingType *Mode;
+    ECyclingType Mode;
 };
