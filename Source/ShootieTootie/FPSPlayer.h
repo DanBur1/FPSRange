@@ -8,6 +8,7 @@
 #include "EnhancedInputComponent.h"
 #include "Shooter.h"
 #include "Blueprint/UserWidget.h"
+#include "Kismet/GameplayStatics.h"
 #include "FPSPlayer.generated.h"
 
 /**
@@ -67,10 +68,14 @@ protected:
 
 	// Methods
 
+  // Reactions to action events
 	// Reaction to IA_LookUp
   void onLook(const FInputActionValue &Value);
   // Reaction to IA_Menu
   void onMenu();
 	// Reaction to IA_Turn
   void onTurn(const FInputActionValue &Value);
+  // Others
+  // Opens and closes WBP_Menu widget
+  void toggleMenu(bool is_open);
 };

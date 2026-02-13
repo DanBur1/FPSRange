@@ -25,4 +25,10 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	// Properties
+
+	// Model
+  UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
+  USkeletalMeshComponent *WeaponMesh;
+
 };

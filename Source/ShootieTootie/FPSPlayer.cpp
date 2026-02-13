@@ -52,24 +52,33 @@ void AFPSPlayer::onLook(const FInputActionValue &Value){
 void AFPSPlayer::onMenu(){
   if (MenuWidget){
     if (MenuWidget->IsVisible()) {
-      SetInputMode(FInputModeGameOnly());
-      bShowMouseCursor = false;
-      MenuWidget->SetVisibility(ESlateVisibility::Hidden);
+      toggleMenu(true);
     } else {
-      SetInputMode(FInputModeUIOnly());
-      bShowMouseCursor = true;
+      toggleMenu(false);
     }
-      MenuWidget->SetVisibility(ESlateVisibility::Visible);
   } else if (MenuWidgetClass){
     MenuWidget = CreateWidget<UUserWidget>(GetWorld(), MenuWidgetClass);
     MenuWidget->AddToViewport();
-    MenuWidget->SetVisibility(ESlateVisibility::Visible);
-    SetInputMode(FInputModeUIOnly());
-    bShowMouseCursor = true;
+    toggleMenu(false);
   }
 }
 
 void AFPSPlayer::onTurn(const FInputActionValue &Value) {
   float yaw_value = Value.Get<float>();
   AddYawInput(yaw_value * mouse_sensitivity);
+}
+
+void AFPSPlayer::toggleMenu(bool is_open){
+  UE_LOG(LogTemp, Warning, TEXT("Is open - %d"), is_open);
+  if (is_open) {
+    UGameplayStatics::SetGamePaused(GetWorld(), false);
+    SetInputMode(FInputModeGameOnly());
+    bShowMouseCursor = false;
+    MenuWidget->SetVisibility(ESlateVisibility::Hidden);
+  } else {
+    //UGameplayStatics::SetGamePaused(GetWorld(), true);
+    MenuWidget->SetVisibility(ESlateVisibility::Visible);
+    SetInputMode(FInputModeGameAndUI());
+    bShowMouseCursor = true;
+  }
 }
