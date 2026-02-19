@@ -41,6 +41,7 @@ void AShooter::Tick(float DeltaTime)
 
 }
 
+
 // Called to bind functionality to input
 void AShooter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
@@ -48,3 +49,9 @@ void AShooter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 }
 
+void AShooter::useWeapon(){
+  if (!Weapon)
+    return;
+  Weapon->startAttacking();
+
+}

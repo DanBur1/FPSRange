@@ -36,6 +36,11 @@ void AFPSPlayer::SetupInputComponent(){
       EnhancedInputComponent->BindAction(MenuAction, ETriggerEvent::Started,
                                          this, &AFPSPlayer::onMenu);
     }
+    // Shooting tooting
+    if (ShootAction) {
+      EnhancedInputComponent->BindAction(ShootAction, ETriggerEvent::Started,
+                                         this, &AFPSPlayer::onShoot);
+    }
     // Turning sideways
     if (TurnAction) {
       EnhancedInputComponent->BindAction(TurnAction, ETriggerEvent::Triggered,
@@ -61,6 +66,12 @@ void AFPSPlayer::onMenu(){
     MenuWidget->AddToViewport();
     toggleMenu(false);
   }
+}
+
+void AFPSPlayer::onShoot(){
+  if (!PlayerCharacter)
+    return;
+  PlayerCharacter->useWeapon();
 }
 
 void AFPSPlayer::onTurn(const FInputActionValue &Value) {

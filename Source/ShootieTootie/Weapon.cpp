@@ -27,3 +27,14 @@ void AWeapon::Tick(float DeltaTime)
 
 }
 
+void AWeapon::finishAttacking(){ AnimState = EHumanoidArmStates::idle; }
+
+void AWeapon::startAttacking(){
+  if (is_cooling_down)
+    return;
+    is_cooling_down = true;
+    GetWorldTimerManager().SetTimer(AttackCooldownTimer, this,
+                                    &AWeapon::finishAttacking, cooldown,
+                                    false);
+    AnimState = EHumanoidArmStates::firing;
+}

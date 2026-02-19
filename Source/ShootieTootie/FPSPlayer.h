@@ -52,6 +52,9 @@ protected:
 	// IA_Menu
   UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
   UInputAction *MenuAction;
+  // IA_Shoot
+  UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
+  class UInputAction *ShootAction;
 	// IA_Turn
   UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
   class UInputAction *TurnAction;
@@ -73,6 +76,8 @@ protected:
   void onLook(const FInputActionValue &Value);
   // Reaction to IA_Menu
   void onMenu();
+  // Reaction to IA_Shoot
+  void onShoot();
 	// Reaction to IA_Turn
   void onTurn(const FInputActionValue &Value);
   // Others

@@ -25,6 +25,11 @@ public:
   // Called every frame
   virtual void Tick(float DeltaTime) override;
 
+  // Methods
+
+  // Takes character weapon and calls its startAttacking function
+  void useWeapon();
+
 protected:
   // Unreal default events
   
@@ -46,6 +51,6 @@ protected:
   UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
   USkeletalMeshComponent *ShooterMesh;
   // Weapon character currently has
-  UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Character items")
+  UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Weapon")
   AWeapon *Weapon;
 };

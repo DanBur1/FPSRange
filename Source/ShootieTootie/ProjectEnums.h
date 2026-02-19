@@ -42,10 +42,8 @@ enum class ECyclingType : uint8 {
 UENUM(BlueprintType)
 // States that affect character's upper body animations
 enum class EHumanoidArmStates : uint8 {
-  null UMETA(DisplayName = "Default state"), // default state
-  interacting UMETA(
-      DisplayName = "Interacting"), // character interacting with interactables
-  attacking UMETA(DisplayName = "Attacking"), // character uses weapon
-  picking UMETA(DisplayName = "Picking"),     // character picks an item
-  throwing UMETA(DisplayName = "Throwing")
+  idle UMETA(DisplayName = "Default state"), // default state
+  firing UMETA(DisplayName = "Firing"), // firing
+  safety UMETA(DisplayName = "Safety"), // switching firing mode to safety
+  reload UMETA(DisplayName = "Reloading")
 };
