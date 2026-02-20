@@ -27,7 +27,10 @@ void AWeapon::Tick(float DeltaTime)
 
 }
 
-void AWeapon::finishAttacking(){ AnimState = EHumanoidArmStates::idle; }
+void AWeapon::finishAttacking(){
+  AnimState = EHumanoidArmStates::idle;
+  is_cooling_down = false;
+}
 
 void AWeapon::startAttacking(){
   if (is_cooling_down)

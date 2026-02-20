@@ -53,4 +53,7 @@ protected:
   // Weapon character currently has
   UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Weapon")
   AWeapon *Weapon;
+  // Class of the weapon character uses. Can be used to set starter weapon
+  UPROPERTY(EditAnywhere, Category = "Weapons")
+  TSubclassOf<AWeapon> WeaponClass;
 };

@@ -31,7 +31,28 @@ AShooter::AShooter() {
 void AShooter::BeginPlay()
 {
 	Super::BeginPlay();
-	
+  FActorSpawnParameters SpawnParams;
+  SpawnParams.Owner = this;
+  SpawnParams.SpawnCollisionHandlingOverride =
+      ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
+  FVector SpawnLocation = FVector::ZeroVector;
+  FRotator SpawnRotation = FRotator::ZeroRotator;
+  if (WeaponClass) {
+    UE_LOG(LogTemp, Warning, TEXT("Has weapon class"));
+    Weapon = GetWorld()->SpawnActor<AWeapon>(WeaponClass, SpawnLocation,
+                                             SpawnRotation, SpawnParams);
+
+    if (Weapon) {
+      UE_LOG(LogTemp, Warning, TEXT("Spawned the gun"));
+      FName SocketName(TEXT("hand_gun"));
+      if (ShooterMesh) {
+        Weapon->AttachToComponent(
+            ShooterMesh,
+            FAttachmentTransformRules::SnapToTargetNotIncludingScale,
+            SocketName);
+      }
+      }
+  }
 }
 
 // Called every frame
